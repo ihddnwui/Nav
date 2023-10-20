@@ -6,7 +6,24 @@
 <body>
     <iframe src="https://www.google.com.br/" frameborder="0" width="100%" height="100%"></iframe>
     <script>
-        function login() {
+       function login() {
+    // Inicie o processo de login.
+    const auth2 = new google.auth.GoogleAuth();
+    auth2.signIn();
+
+    // Aguarde o usuário fazer login.
+    auth2.then(function(authResult) {
+        // Obtenha o token de acesso.
+        const token = authResult.access_token;
+
+        // Faça login na sua conta do Google.
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "https://www.google.com/accounts/o8/signin/challenge?source=embedded");
+        xhr.setRequestHeader("Authorization", "Bearer " + token);
+        xhr.send();
+    });
+}
+ {
             // Insira o código para fazer login na sua conta do Google aqui.
         }
 
